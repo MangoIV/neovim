@@ -2,7 +2,7 @@
   description = "Neovim flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:mangoiv/nixpkgs/mangoiv/update-tree-sitter";
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -28,34 +28,34 @@
       overlay = final: prev: {
 
         neovim = (final.neovim-unwrapped.override {
-          treesitter-parsers = pipe ../cmake.deps/deps.txt [
-            readFile
-            (splitString "\n")
-            (map (match "TREESITTER_([A-Z_]+)_(URL|SHA256)[[:space:]]+([^[:space:]]+)[[:space:]]*"))
-            (remove null)
-            (flip foldl' { }
-              (acc: matches:
-                let
-                  lang = toLower (elemAt matches 0);
-                  type = toLower (elemAt matches 1);
-                  value = elemAt matches 2;
-                in
-                acc // {
-                  ${lang} = acc.${lang} or { } // {
-                    ${type} = value;
-                  };
-                }))
-            (mapAttrs (const final.fetchurl))
-            (self: self // {
-              markdown = final.stdenv.mkDerivation {
-                inherit (self.markdown) name;
-                src = self.markdown;
-                installPhase = ''
-                  mv tree-sitter-markdown $out
-                '';
-              };
-            })
-          ];
+          # treesitter-parsers = pipe ../cmake.deps/deps.txt [
+          #   readFile
+          #   (splitString "\n")
+          #   (map (match "TREESITTER_([A-Z_]+)_(URL|SHA256)[[:space:]]+([^[:space:]]+)[[:space:]]*"))
+          #   (remove null)
+          #   (flip foldl' { }
+          #     (acc: matches:
+          #       let
+          #         lang = toLower (elemAt matches 0);
+          #         type = toLower (elemAt matches 1);
+          #         value = elemAt matches 2;
+          #       in
+          #       acc // {
+          #         ${lang} = acc.${lang} or { } // {
+          #           ${type} = value;
+          #         };
+          #       }))
+          #   (mapAttrs (const final.fetchurl))
+          #   (self: self // {
+          #     markdown = final.stdenv.mkDerivation {
+          #       inherit (self.markdown) name;
+          #       src = self.markdown;
+          #       installPhase = ''
+          #         mv tree-sitter-markdown $out
+          #       '';
+          #     };
+          #   })
+          # ];
         }).overrideAttrs (oa: rec {
           version = self.shortRev or "dirty";
           src = ../.;

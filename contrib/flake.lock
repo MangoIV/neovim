@@ -20,16 +20,16 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1713248628,
-        "narHash": "sha256-NLznXB5AOnniUtZsyy/aPWOk8ussTuePp2acb9U+ISA=",
-        "owner": "nixos",
+        "lastModified": 1715943380,
+        "narHash": "sha256-iiCSenjm/mBNGi4aeIgZYkQ4PcTSoQ3pI58mmJLds+w=",
+        "owner": "mangoiv",
         "repo": "nixpkgs",
-        "rev": "5672bc9dbf9d88246ddab5ac454e82318d094bb8",
+        "rev": "a02f19658522c5da57adb0234328e3e2643fb46c",
         "type": "github"
       },
       "original": {
-        "owner": "nixos",
-        "ref": "nixos-unstable",
+        "owner": "mangoiv",
+        "ref": "mangoiv/update-tree-sitter",
         "repo": "nixpkgs",
         "type": "github"
       }
